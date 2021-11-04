@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "587617453341",
+    "project_id": "stickermessaging-610ea",
+    "storage_bucket": "stickermessaging-610ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587617453341:android:66b96dc2c22e2f4bd80df4",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.stickittothem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587617453341-eeavbsq7aahdvmvjlb34setkred1qq08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjOok6_PcT1jbKNnVUPbQfCP5n2EiIsuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587617453341-eeavbsq7aahdvmvjlb34setkred1qq08.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
