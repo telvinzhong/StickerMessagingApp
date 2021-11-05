@@ -24,37 +24,36 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
         Button registerButton = findViewById(R.id.register);
-//        registerButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                registerUser()
-//            }
-//        });
-
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registerUser();
+            }
+        });
 
 
     }
-
-
 
     private void registerUser(){
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("message");
+        TextView userN = findViewById(R.id.username);
+        String userName = userN.getText().toString();
 
-        Task t = myRef.setValue("Hello, World!");
-        if(!t.isSuccessful()){
-            Toast.makeText(getApplicationContext()
-                    , "Failed to write value into firebase. " , Toast.LENGTH_SHORT).show();
-            return;
-        }
+        User user = new User(userName);
+        mDatabase.child("users").child(userName).setValue(user);
 
     }
+
+
+
 }
