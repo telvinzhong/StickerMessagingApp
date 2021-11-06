@@ -1,5 +1,7 @@
 package edu.neu.madcourse.stickittothem;
 
+import com.google.firebase.database.DataSnapshot;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,16 @@ public class User {
     int sticker2Sent;
     int sticker3Sent;
 
+    // Singleton since the APP can only have one user at a time.
+    private static User globalUser = null;
+
+    public static synchronized void setGlobalUser(User user) {
+        globalUser = user;
+    }
+
+    public static synchronized User getGlobalUser() {
+        return globalUser;
+    }
 
     public User(String userName){
         this.userName = userName;
@@ -22,6 +34,13 @@ public class User {
         this.stickersReceivedWhich = new ArrayList<>();
         this.stickersReceivedWho = new ArrayList<>();
     }
+
+    public void loadFrom(DataSnapshot userData) {
+        for (DataSnapshot when : userData.child("stickersReceivedWhen").getChildren()) {
+            stickersReceivedWhen.add(when.getValue(String.class));
+        }
+    }
+
     public String getUserName() {
         return this.userName;
     }

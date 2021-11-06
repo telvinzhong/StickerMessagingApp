@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StickItToThem">
         <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -18,11 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".SignupActivity"></activity>
-        <activity android:name=".HistorySentActivity"></activity>
-        <activity android:name=".HistoryReceivedActivity"></activity>
-        <activity android:name=".SendActivity"></activity>
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".HistorySentActivity" />
+        <activity android:name=".HistoryReceivedActivity" />
+        <activity android:name=".SendActivity" />
     </application>
 
 </manifest>
