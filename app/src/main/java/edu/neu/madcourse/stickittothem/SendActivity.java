@@ -84,28 +84,25 @@ public class SendActivity extends AppCompatActivity {
         Date date = new Date(System.currentTimeMillis());
         if (cb1.isChecked()){
             mDatabase.child("users").child(receiver).child("stickersReceivedWhen").push().setValue(formatter.format(date));
-            mDatabase.child("users").child(receiver).child("stickersReceivedWho").push().setValue("Current user");
+            mDatabase.child("users").child(receiver).child("stickersReceivedWho").push().setValue(User.getGlobalUser().getUserName());
             mDatabase.child("users").child(receiver).child("stickersReceivedWhich").push().setValue("1");
             Toast.makeText(getApplicationContext(), "Sticker " + "1 " + "sent successfully to " + receiver, Toast.LENGTH_SHORT).show();
 
         }
         else if (cb2.isChecked()){
             mDatabase.child("users").child(receiver).child("stickersReceivedWhen").push().setValue(formatter.format(date));
-            mDatabase.child("users").child(receiver).child("stickersReceivedWho").push().setValue("Current user");
+            mDatabase.child("users").child(receiver).child("stickersReceivedWho").push().setValue(User.getGlobalUser().getUserName());
             mDatabase.child("users").child(receiver).child("stickersReceivedWhich").push().setValue("2");
-            Toast.makeText(getApplicationContext(), "Sticker " + "1 " + "sent successfully to " + receiver, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sticker " + "2 " + "sent successfully to " + receiver, Toast.LENGTH_SHORT).show();
 
         }
         else{
             mDatabase.child("users").child(receiver).child("stickersReceivedWhen").push().setValue(formatter.format(date));
-            mDatabase.child("users").child(receiver).child("stickersReceivedWho").push().setValue("Current user");
+            mDatabase.child("users").child(receiver).child("stickersReceivedWho").push().setValue(User.getGlobalUser().getUserName());
             mDatabase.child("users").child(receiver).child("stickersReceivedWhich").push().setValue("3");
-            Toast.makeText(getApplicationContext(), "Sticker " + "1 " + "sent successfully to " + receiver, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sticker " + "3 " + "sent successfully to " + receiver, Toast.LENGTH_SHORT).show();
         }
         re.setText("");
     }
-    // thing need to do
-//    check for login before sending
-//    update stickersent after sending
-// update currentuser when sending
+
 }
