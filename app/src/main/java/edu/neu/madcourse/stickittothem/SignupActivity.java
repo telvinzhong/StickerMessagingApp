@@ -17,7 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 public class SignupActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +47,6 @@ public class SignupActivity extends AppCompatActivity {
                     // User exist
                     if (data.child(userName).exists()){
                         Toast.makeText(getApplicationContext(), "Username is already taken", Toast.LENGTH_SHORT).show();
-
                     }
                     // User not exist
                     else{
@@ -62,7 +60,6 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
         userN.setText("");
-
     }
 
 
