@@ -59,6 +59,9 @@ public class User {
         sticker1Sent = unbox(userData.child("sticker1Sent").getValue(Integer.class));
         sticker2Sent = unbox(userData.child("sticker2Sent").getValue(Integer.class));
         sticker3Sent = unbox(userData.child("sticker3Sent").getValue(Integer.class));
+        stickersReceivedWhen.clear();
+        stickersReceivedWhich.clear();
+        stickersReceivedWho.clear();
         for (DataSnapshot when : userData.child("stickersReceivedWhen").getChildren()) {
             stickersReceivedWhen.add(when.getValue(String.class));
         }
