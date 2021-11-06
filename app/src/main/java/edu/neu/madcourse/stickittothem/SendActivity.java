@@ -37,11 +37,15 @@ public class SendActivity extends AppCompatActivity {
         cb1 = findViewById(R.id.checkBox1);
         cb2 = findViewById(R.id.checkBox2);
         cb3 = findViewById(R.id.checkBox3);
-        Button registerButton = findViewById(R.id.send);
+        Button sendButton = findViewById(R.id.send);
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (User.getGlobalUser() == null) {
+                    Toast.makeText(getApplicationContext(), "Please log in first", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 // get username input
                 re = findViewById(R.id.receiver);
                 String receiver = re.getText().toString();
@@ -61,7 +65,7 @@ public class SendActivity extends AppCompatActivity {
                                 }
                                 // User not exist
                                 else{
-                                    Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Receiving user not exist", Toast.LENGTH_SHORT).show();
                                 }
                             };
                         }
