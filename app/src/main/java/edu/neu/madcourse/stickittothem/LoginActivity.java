@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                 User.setGlobalUser(loadedUser);
                 showToast("User " + user + " successfully login. Now you can send stickers! 🚀");
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                Log.d("User", loadedUser.toString());
             }
 
             @Override
