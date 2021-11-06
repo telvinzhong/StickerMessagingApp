@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 User loadedUser = new User(user);
-                loadedUser.loadFrom(userData);
+                loadedUser.syncWith(userData);
                 User.setGlobalUser(loadedUser);
                 showToast("User " + user + " successfully login. Now you can send stickers! 🚀");
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
