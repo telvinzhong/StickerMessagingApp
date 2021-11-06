@@ -21,10 +21,13 @@ public class User {
         this.stickersReceivedWhen = new ArrayList<>();
         this.stickersReceivedWhich = new ArrayList<>();
         this.stickersReceivedWho = new ArrayList<>();
-
     }
     public String getUserName() {
         return this.userName;
+    }
+
+    public void setUserName(String userName){
+        this.userName = userName;
     }
 
     public int getSticker1Sent() {
