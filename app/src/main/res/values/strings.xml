@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">StickItToThem</string>
+    <integer-array name="database_images">
+        <item>@android:drawable/ic_menu_call</item>
+        <item>@android:drawable/ic_menu_edit</item>
+        <item>@android:drawable/ic_menu_camera</item>
+    </integer-array>
 </resources>

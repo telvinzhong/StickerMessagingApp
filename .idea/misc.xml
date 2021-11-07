@@ -6,11 +6,14 @@
         <entry key="..\:/Users/Telvin/AndroidStudioProjects/StickItToThem/app/src/main/res/layout/activity_history_sent.xml" value="0.11614583333333334" />
         <entry key="..\:/Users/Telvin/AndroidStudioProjects/StickItToThem/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Telvin/AndroidStudioProjects/StickItToThem/app/src/main/res/layout/activity_send.xml" value="0.13020833333333334" />
+        <entry key="app/src/main/res/layout/activity_history_received.xml" value="0.13677811550151975" />
         <entry key="app/src/main/res/layout/activity_history_sent.xml" value="0.3804347826086957" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.35597826086956524" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5615500742752177" />
         <entry key="app/src/main/res/layout/activity_send.xml" value="0.3283514492753623" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/activity_test.xml" value="0.13677811550151975" />
+        <entry key="app/src/main/res/layout/row.xml" value="0.25" />
       </map>
     </option>
   </component>

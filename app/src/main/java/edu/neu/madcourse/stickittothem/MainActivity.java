@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SignupActivity.class));
                 break;
             case R.id.historyReceived:
-                startActivity(new Intent(this, HistoryReceivedActivity.class));
+                startActivity(new Intent(this, HistoryReceived.class));
                 break;
             case R.id.historySent:
                 startActivity(new Intent(this, HistorySentActivity.class));
