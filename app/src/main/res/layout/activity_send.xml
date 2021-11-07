@@ -46,6 +46,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="35dp"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2d4f2022cf736218ffcda6874f41360a46449558
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/checkBox2"

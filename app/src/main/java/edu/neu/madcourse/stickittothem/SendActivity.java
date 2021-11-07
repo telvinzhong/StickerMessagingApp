@@ -86,6 +86,7 @@ public class SendActivity extends AppCompatActivity {
             mDatabase.child("users").child(receiver).child("stickersReceivedWhen").push().setValue(formatter.format(date));
             mDatabase.child("users").child(receiver).child("stickersReceivedWho").push().setValue(User.getGlobalUser().getUserName());
             mDatabase.child("users").child(receiver).child("stickersReceivedWhich").push().setValue("1");
+            mDatabase.child("users").child(User.getGlobalUser().getUserName()).child("sticker1Sent").setValue(User.getGlobalUser().getSticker1Sent()+1);
             Toast.makeText(getApplicationContext(), "Sticker " + "1 " + "sent successfully to " + receiver, Toast.LENGTH_SHORT).show();
 
         }
@@ -93,6 +94,8 @@ public class SendActivity extends AppCompatActivity {
             mDatabase.child("users").child(receiver).child("stickersReceivedWhen").push().setValue(formatter.format(date));
             mDatabase.child("users").child(receiver).child("stickersReceivedWho").push().setValue(User.getGlobalUser().getUserName());
             mDatabase.child("users").child(receiver).child("stickersReceivedWhich").push().setValue("2");
+            mDatabase.child("users").child(User.getGlobalUser().getUserName()).child("sticker2Sent").setValue(User.getGlobalUser().getSticker2Sent()+1);
+
             Toast.makeText(getApplicationContext(), "Sticker " + "2 " + "sent successfully to " + receiver, Toast.LENGTH_SHORT).show();
 
         }
@@ -100,6 +103,7 @@ public class SendActivity extends AppCompatActivity {
             mDatabase.child("users").child(receiver).child("stickersReceivedWhen").push().setValue(formatter.format(date));
             mDatabase.child("users").child(receiver).child("stickersReceivedWho").push().setValue(User.getGlobalUser().getUserName());
             mDatabase.child("users").child(receiver).child("stickersReceivedWhich").push().setValue("3");
+            mDatabase.child("users").child(User.getGlobalUser().getUserName()).child("sticker3Sent").setValue(User.getGlobalUser().getSticker3Sent()+1);
             Toast.makeText(getApplicationContext(), "Sticker " + "3 " + "sent successfully to " + receiver, Toast.LENGTH_SHORT).show();
         }
         re.setText("");
