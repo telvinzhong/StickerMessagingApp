@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // This is important!! setServerKey will load the SERVER_KEY from assets, without which the
+        // app cannot send notification.
         CloudMessaging.setServerKey(this);
     }
 

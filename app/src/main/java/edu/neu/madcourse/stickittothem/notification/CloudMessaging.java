@@ -15,6 +15,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.installations.FirebaseInstallations;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -29,18 +30,20 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Objects;
 import java.util.Properties;
 
 import edu.neu.madcourse.stickittothem.MainActivity;
 import edu.neu.madcourse.stickittothem.R;
-import edu.neu.madcourse.stickittothem.User;
 
 public class CloudMessaging extends FirebaseMessagingService {
     private static final String TAG = "CloudMessaging";
     private static String SERVER_KEY = "";
 
-    private static String CLIENT_REGISTRATION_TOKEN;
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        FirebaseInstallations.getInstance().delete();
+        super.onTaskRemoved(rootIntent);
+    }
 
     private static Properties getProperties(Context context) {
         Properties properties = new Properties();
@@ -66,7 +69,7 @@ public class CloudMessaging extends FirebaseMessagingService {
         JSONObject jNotification = new JSONObject();
         try {
             jNotification.put("title", "New sticker!");
-            jNotification.put("body", "You got a sticker from " + sender);
+            jNotification.put("body", "🎉Hooray! " + receiver + ", you just got a sticker from " + sender);
             jNotification.put("sound", "default");
             jNotification.put("badge", "1");
             jNotification.put("click_action", "OPEN_ACTIVITY_1");
@@ -129,25 +132,10 @@ public class CloudMessaging extends FirebaseMessagingService {
         return stringBuilder.toString();
     }
 
-    public void generateToken(Context context) {
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if (!task.isSuccessful()) {
-                    Toast.makeText(CloudMessaging.this, "Something is wrong!", Toast.LENGTH_SHORT).show();
-                } else {
-                    onNewToken(Objects.requireNonNull(task.getResult()));
-                }
-            }
-        });
-    }
 
     @Override
     public void onNewToken(@NonNull String token) {
-        User currentUser = User.getGlobalUser();
-        if (currentUser != null) {
-            currentUser.setToken(token);
-        }
+        Log.d(TAG, "Got new token: " + token);
     }
 
     @Override
@@ -164,7 +152,7 @@ public class CloudMessaging extends FirebaseMessagingService {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
 
         Notification notification;
         NotificationCompat.Builder builder;

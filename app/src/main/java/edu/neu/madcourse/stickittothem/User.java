@@ -26,7 +26,6 @@ public class User {
     int sticker3Sent;
     private DatabaseReference databaseReference;
     private ValueEventListener valueEventListener;
-    private String token;
 
     public User(String userName) {
         this.userName = userName;
@@ -36,7 +35,6 @@ public class User {
         this.stickersReceivedWhen = new ArrayList<>();
         this.stickersReceivedWhich = new ArrayList<>();
         this.stickersReceivedWho = new ArrayList<>();
-        this.token = null;
     }
 
     public static synchronized User getGlobalUser() {
@@ -75,15 +73,6 @@ public class User {
         });
     }
 
-    public synchronized void setToken(String token) {
-        this.token = token;
-        databaseReference.child("token").setValue(token);
-    }
-
-    public synchronized String getToken(String token) {
-        return token;
-    }
-
     private static int unbox(Integer i) {
         if (i == null) return 0;
         return i;
@@ -105,7 +94,6 @@ public class User {
         for (DataSnapshot when : userData.child("stickersReceivedWho").getChildren()) {
             stickersReceivedWho.add(when.getValue(String.class));
         }
-        token = userData.child("token").getValue(String.class);
         Log.d(TAG, "loaded data from Firebase: " + toString());
     }
 
