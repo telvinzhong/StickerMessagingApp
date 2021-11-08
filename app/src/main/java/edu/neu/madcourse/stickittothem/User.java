@@ -8,11 +8,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+    private static final String TAG = User.class.getName();
+    // Singleton since the APP can only have one user at a time.
+    private static User globalUser = null;
     String userName;
     List<String> stickersReceivedWho;
     List<String> stickersReceivedWhich;
@@ -22,25 +26,9 @@ public class User {
     int sticker3Sent;
     private DatabaseReference databaseReference;
     private ValueEventListener valueEventListener;
+    private String token;
 
-    // Singleton since the APP can only have one user at a time.
-    private static User globalUser = null;
-
-    public static synchronized void setGlobalUser(User user) {
-        if (globalUser == user) {
-            return;
-        }
-        if (globalUser != null) {
-            globalUser.unsync();
-        }
-        globalUser = user;
-    }
-
-    public static synchronized User getGlobalUser() {
-        return globalUser;
-    }
-
-    public User(String userName){
+    public User(String userName) {
         this.userName = userName;
         this.sticker1Sent = 0;
         this.sticker2Sent = 0;
@@ -48,6 +36,52 @@ public class User {
         this.stickersReceivedWhen = new ArrayList<>();
         this.stickersReceivedWhich = new ArrayList<>();
         this.stickersReceivedWho = new ArrayList<>();
+        this.token = null;
+    }
+
+    public static synchronized User getGlobalUser() {
+        return globalUser;
+    }
+
+    public static synchronized void setGlobalUser(User user) {
+        if (globalUser == user) {
+            return;
+        }
+        if (globalUser != null) {
+            globalUser.unsync();
+            globalUser.unsubscribeToTopic();;
+        }
+        globalUser = user;
+        globalUser.subscribeToTopic();
+    }
+
+    private void subscribeToTopic() {
+        final String currentUsername = userName;
+        FirebaseMessaging.getInstance().subscribeToTopic(userName).addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e(TAG, "Failed to subscribe to topic: " + currentUsername);
+            } else {
+                Log.d(TAG, "Successfully subscribe to topic: " + currentUsername);
+            }
+        });
+    }
+
+    private void unsubscribeToTopic() {
+        final String currentUsername = userName;
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(userName).addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e(TAG, "Failed to unsubscribe to topic: " + currentUsername);
+            }
+        });
+    }
+
+    public synchronized void setToken(String token) {
+        this.token = token;
+        databaseReference.child("token").setValue(token);
+    }
+
+    public synchronized String getToken(String token) {
+        return token;
     }
 
     private static int unbox(Integer i) {
@@ -71,7 +105,8 @@ public class User {
         for (DataSnapshot when : userData.child("stickersReceivedWho").getChildren()) {
             stickersReceivedWho.add(when.getValue(String.class));
         }
-        Log.d("User", "loaded data from Firebase: " + toString());
+        token = userData.child("token").getValue(String.class);
+        Log.d(TAG, "loaded data from Firebase: " + toString());
     }
 
     public void syncWith(DataSnapshot userData) {
@@ -98,7 +133,7 @@ public class User {
         return this.userName;
     }
 
-    public void setUserName(String userName){
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
